@@ -24,3 +24,13 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
 });
+
+
+// POST /api/chat - frontend üzenetek fogadása
+app.post("/api/chat", (req, res) => {
+  const { language, level, message } = req.body;
+
+  res.json({
+    reply: `Received (${language}, ${level}): ${message}`
+  });
+});
