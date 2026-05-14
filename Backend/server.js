@@ -1,16 +1,21 @@
 
 // backend/server.js
 
-// 1. Express betöltése
+// ===== IMPORTOK =====
 const express = require("express");
+const FakeAIService = require("./ai/FakeAIService");
 
-// 2. Express alkalmazás létrehozása
+// ===== APP LÉTREHOZÁS =====
 const app = express();
 
-// 3. Middleware a JSON adatok kezelésére
+
+// ===== MIDDLEWARE =====
 app.use(express.json());
 
-// 4. Teszt végpont (életjel)
+// ===== AI PÉLDÁNY =====
+const aiService = new FakeAIService();
+
+// ===== HEALTH CHECK =====
 app.get("/api/health", (req, res) => {
   res.json({
     status: "ok",
@@ -18,19 +23,23 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// 5. Szerver indítása
+// ===== CHAT ENDPOINT =====
+app.post("/api/chat", (req, res) => {
+  const { language, level, message } = req.body;
+
+  const reply = aiService.reply({
+    language,
+    level,
+    message
+  });
+
+  res.json({ reply });
+});
+
+// ===== SERVER INDÍTÁS =====
 const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`);
 });
-
-
-// POST /api/chat - frontend üzenetek fogadása
-app.post("/api/chat", (req, res) => {
-  const { language, level, message } = req.body;
-
-  res.json({
-    reply: `Received (${language}, ${level}): ${message}`
-  });
-});
+``
