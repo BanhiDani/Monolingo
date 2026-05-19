@@ -1,15 +1,13 @@
 export default class LanguageSelector{ 
     #nyelv="";
     #nyelvSzint="";
-    constructor(sectionELEM){
+    constructor(sectionELEM, nyelv, nyelvSzint){
         this.sectionELEM=sectionELEM;
         this.#nyelv;
         this.#nyelvSzint;
         this.nyelvUI();
         this.kattintasEsemeny();
     }
-
-
     nyelvUI(){
         let kod=`
         <div class="nyelvUI">
@@ -21,6 +19,9 @@ export default class LanguageSelector{
         </div>
         `
         this.sectionELEM.insertAdjacentHTML("beforeend", kod);
+    }
+    UIEltuntet() {
+        this.sectionELEM.innerHTML=""
     }
     szintUI(){
         let kod=`
@@ -34,22 +35,24 @@ export default class LanguageSelector{
         `
         this.sectionELEM.insertAdjacentHTML("beforeend", kod);
     }
-    kattintasEsemeny(){
-        const gombELEM=document.querySelectorAll(".gomb");
-        for (let index = 0; index < gombELEM.length; index++) {
-            const gomb = gombELEM[index].innerHTML;
-            gombELEM[index].addEventListener("click", ()=>{
-                this.#nyelv=gomb
-                this.gombKattint();
-            })  
-        }
-    
+kattintasEsemeny() {
+    const gombELEM=document.querySelectorAll(".gomb");
+    this.sectionELEM.addEventListener("click", (event) => {
+    if (!event.target.classList.contains("gomb"));
+            if (this.#nyelv==="") {
+                this.#nyelv=event.target.innerText;
+                this.UIEltuntet();
+                this.szintUI();
+            }
+            else if (this.#nyelv!=""){
+                this.#nyelvSzint = event.target.innerText;
+                this.UIEltuntet();
+                const esemeny = new CustomEvent("nyelvBeallit", {
+                    detail: {szint: this.#nyelvSzint, nyelv: this.#nyelv
+                    }
+                });
+                document.dispatchEvent(esemeny);
+            }
+        });
     }
-    gombKattint(){
-        const event = new CustomEvent("gombnyomas", 
-            {detail:{szint: this.#nyelvSzint, nyelv: this.#nyelv}}
-
-        );
-    }
-
 }
