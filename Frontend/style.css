@@ -1,0 +1,50 @@
+body{
+    background-color: rgb(27, 27, 27);
+    margin: auto auto;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.nyelvUI{
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    text-align: center;
+    color: blueviolet;
+    border: solid 8px blueviolet; 
+    max-width: 500px;
+    flex: 0 1 100%;
+}
+p{
+    font-size: 30px;
+
+
+}
+p:hover{
+    color: rgb(63, 20, 104);
+    background-color: black;
+
+}
+
+.chatUI{
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    text-align: center;
+    color: blueviolet;
+    border: solid 8px blueviolet; 
+    max-width: 500px;
+    flex: 0 1 100%;
+}
+textarea{
+    height: 10vw;
+    max-width: 600px;
+}
+button{
+    height: 100px;
+    
+}

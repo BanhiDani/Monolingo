@@ -3,15 +3,16 @@ export default class LanguageSelector{
     #nyelvSzint="";
     constructor(sectionELEM, nyelv, nyelvSzint){
         this.sectionELEM=sectionELEM;
-        this.#nyelv;
-        this.#nyelvSzint;
+        this.#nyelv=nyelv;
+        this.#nyelvSzint=nyelvSzint;
         this.nyelvUI();
         this.kattintasEsemeny();
     }
     nyelvUI(){
         let kod=`
+        
         <div class="nyelvUI">
-            <h1>Válassz nyelvet!<h1>
+            <h1>Válassz nyelvet!</h1>
             <p class="gomb">Spanyol</p>
             <p class="gomb">Olasz</p>
             <p class="gomb">Német</p>
@@ -26,33 +27,41 @@ export default class LanguageSelector{
     szintUI(){
         let kod=`
         <div class="nyelvUI">
-            <h1>Válassz szintet!<h1>
-            <p class="gomb">1</p>
-            <p class="gomb">2</p>
-            <p class="gomb">3</p>
-            <p class="gomb">4</p>
+            <h1>Válassz szintet!</h1>
+            <p class="gomb">A1</p>
+            <p class="gomb">A2</p>
+            <p class="gomb">B1</p>
+            <p class="gomb">B2</p>
+            <p class="gomb">C1</p>
+            <p class="gomb">C2</p>
         </div>
         `
         this.sectionELEM.insertAdjacentHTML("beforeend", kod);
     }
-kattintasEsemeny() {
-    const gombELEM=document.querySelectorAll(".gomb");
-    this.sectionELEM.addEventListener("click", (event) => {
-    if (!event.target.classList.contains("gomb"));
-            if (this.#nyelv==="") {
-                this.#nyelv=event.target.innerText;
-                this.UIEltuntet();
-                this.szintUI();
-            }
-            else if (this.#nyelv!=""){
-                this.#nyelvSzint = event.target.innerText;
-                this.UIEltuntet();
-                const esemeny = new CustomEvent("nyelvBeallit", {
-                    detail: {szint: this.#nyelvSzint, nyelv: this.#nyelv
+    kattintasEsemeny() {
+        const gombELEM=document.querySelectorAll(".gomb");
+        gombELEM.forEach(gomb => { 
+            gomb.addEventListener("click", (event) => {
+            const katt=event.detail.innerHTML;
+                if (this.#nyelv==="") {
+                    this.#nyelv=katt;
+                    this.UIEltuntet();
+                    this.szintUI();
                     }
-                });
-                document.dispatchEvent(esemeny);
-            }
+                    
+                else if (this.#nyelv!=""){
+                    this.#nyelvSzint = katt;
+                    this.UIEltuntet();
+                    const esemeny = new CustomEvent("nyelvBeallit", {
+                        detail: {szint: this.#nyelvSzint, nyelv: this.#nyelv}
+                    });
+                    document.dispatchEvent(esemeny);
+                }
+            });
         });
     }
 }
+
+
+
+
