@@ -1,7 +1,4 @@
-
 export default class Services {
-
-
     getAdat(vegpont, callback) {
         fetch(vegpont)
             .then(response => response.json())
@@ -10,8 +7,7 @@ export default class Services {
             })
             .catch(error => console.log(error));
     }
-
-
+    
     postAdat(vegpont, adat, callback) {
         fetch(vegpont, {
             method: "POST",

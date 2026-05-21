@@ -4,28 +4,36 @@ import ChatUI from "./ui/ChatUI.js";
 
 const sectionELEM=document.querySelector("section");
 
-//const Services = new Services("");
+let nyelv="";
+let nyelvSzint="";
+let AIuzenet="";
 
-
-const nyelv="";
-const nyelvSzint="";
-
+const services= new Services();
 new LanguageSelector(sectionELEM, nyelv, nyelvSzint)
 
 document.addEventListener("nyelvBeallit", (event) => {
     const nyelv = event.detail.nyelv;
     const nyelvSzint = event.detail.szint
-    new ChatUI(sectionELEM, nyelv, nyelvSzint);
     console.log(nyelv)
     console.log(nyelvSzint)
     const adat = {
         nyelv: event.detail.nyelv,
-        szint: event.detail.nyelv
-    };
+        szint: event.detail.szint
+    }; 
+    services.postAdat("http://localhost:3000/api/chat", adat, (v)=>{console.log("a", v)})
+    new ChatUI(sectionELEM, AIuzenet);
 });
 
-
-
-
-
-
+document.addEventListener("uzenet", (event)=>{
+    const uzenet = event.detail.uzenet;
+    console.log(uzenet)
+    const chatAdat = {
+            language: nyelv,
+            level: nyelvSzint,
+            message: uzenet}
+    services.postAdat("http://localhost:3000/api/chat", chatAdat, (reply)=>{
+        AIuzenet=reply.message;
+        ChatUI.AIvalasz(AIuzenet);
+        }
+    )
+})

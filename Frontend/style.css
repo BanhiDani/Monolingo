@@ -1,13 +1,19 @@
 body{
-    background-color: rgb(27, 27, 27);
+    background-color: rgb(17, 2, 31);
+}
+main{
+    height: 60vw;
+    width: 80%;
     margin: auto auto;
+    background-color: rgb(27, 27, 27);
+    border: solid 8px rgb(37, 19, 54); 
 }
 
 section{
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin: auto auto;
 }
 .nyelvUI{
     display: flex;
@@ -19,15 +25,14 @@ section{
     max-width: 500px;
     flex: 0 1 100%;
 }
+
 p{
     font-size: 30px;
-
-
 }
-p:hover{
+
+.szint_gomb:hover, .gomb:hover{
     color: rgb(63, 20, 104);
     background-color: black;
-
 }
 
 .chatUI{
@@ -40,11 +45,32 @@ p:hover{
     max-width: 500px;
     flex: 0 1 100%;
 }
-textarea{
-    height: 10vw;
+
+textarea{    
     max-width: 600px;
+    resize: none;
 }
+
+#uzenetKuld{
+    height: 4vw;
+}
+
+#uzenetFogad{
+    height: 10vw;
+}
+
 button{
-    height: 100px;
-    
+    height: 100px;    
+}
+
+h1{
+    font-size: 40px;
+    text-align: center;
+    color: blueviolet;
+}
+
+footer{
+    text-align: center;
+    color: blueviolet;
+    background-color: rgb(27, 7, 46);
 }
