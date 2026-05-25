@@ -1,12 +1,19 @@
 body{
     background-color: rgb(17, 2, 31);
+    background-image: url(js/kepek/hatter.png);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 main{
-    height: 60vw;
     width: 80%;
     margin: auto auto;
     background-color: rgb(27, 27, 27);
-    border: solid 8px rgb(37, 19, 54); 
+    border: solid 8px rgb(108, 19, 190);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 section{
@@ -14,6 +21,7 @@ section{
     justify-content: center;
     align-items: center;
     margin: auto auto;
+    flex: 0 1 100%;
 }
 .nyelvUI{
     display: flex;
@@ -21,9 +29,11 @@ section{
     border-radius: 15px;
     text-align: center;
     color: blueviolet;
+    background-color: rgb(32, 31, 31);
     border: solid 8px blueviolet; 
     max-width: 500px;
     flex: 0 1 100%;
+    width: 75vw;
 }
 
 p{
@@ -36,6 +46,8 @@ p{
 }
 
 .chatUI{
+
+
     display: flex;
     flex-direction: column;
     border-radius: 15px;
@@ -43,33 +55,50 @@ p{
     color: blueviolet;
     border: solid 8px blueviolet; 
     max-width: 500px;
-    flex: 0 1 100%;
+    width: 75vw;
 }
 
 textarea{    
-    max-width: 600px;
+    min-width: 100px;
     resize: none;
+    font-size: 20px;
 }
 
 #uzenetKuld{
     height: 4vw;
+    
 }
 
 #uzenetFogad{
     height: 10vw;
+    border-bottom: 3px solid blueviolet;
 }
 
 button{
-    height: 100px;    
+    font-size: 25px;
+    min-height: 50px;  
+    color: white;
+    border: 1px blueviolet solid;
+    background-color: blueviolet;
+}
+button:hover{
+    color: rgb(121, 118, 124);
+    background-color: rgb(63, 20, 104);
 }
 
 h1{
     font-size: 40px;
     text-align: center;
     color: blueviolet;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+header{
+    margin-bottom: 30px;
+    background-color: rgb(27, 7, 46);
 }
 
 footer{
+    margin-top:30px;
     text-align: center;
     color: blueviolet;
     background-color: rgb(27, 7, 46);
