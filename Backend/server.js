@@ -3,13 +3,15 @@
 
 // ===== IMPORTOK =====
 const express = require("express");
-const FakeAIService = require("./ai/FakeAIService");
+const FakeAIService = require("ai/FakeAIService");
+const cors = require("cors");
 
 // ===== APP LÉTREHOZÁS =====
 const app = express();
 
 
 // ===== MIDDLEWARE =====
+app.use(cors()); 
 app.use(express.json());
 
 // ===== AI PÉLDÁNY =====
