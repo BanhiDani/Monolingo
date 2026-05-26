@@ -3,7 +3,7 @@
 
 // ===== IMPORTOK =====
 const express = require("express");
-const FakeAIService = require("ai/FakeAIService");
+const FakeAIService = require("./Ai/FakeAIService");
 const cors = require("cors");
 
 // ===== APP LÉTREHOZÁS =====
