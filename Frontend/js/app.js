@@ -17,8 +17,8 @@ document.addEventListener("nyelvBeallit", (event) => {
     console.log(nyelv)
     console.log(nyelvSzint)
     const adat = {
-        nyelv: event.detail.nyelv,
-        szint: event.detail.szint
+        language: event.detail.nyelv,
+        level: event.detail.szint
     }; 
     services.postAdat("http://localhost:3000/api/chat", adat, (v)=>{console.log("a", v)})
     new ChatUI(sectionELEM, AIuzenet);

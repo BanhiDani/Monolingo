@@ -1,6 +1,6 @@
 body{
     background-color: rgb(17, 2, 31);
-    background-image: url(js/kepek/hatter.png);
+    background-image: url(kepek/hatter.png);
     min-height: 100vh;
     display: flex;
     justify-content: center;
