@@ -2,6 +2,7 @@ import Services from "./services/ApiClient.js";
 import LanguageSelector from "./ui/LanguageSelector.js";
 import ChatUI from "./ui/ChatUI.js";
 
+
 const sectionELEM=document.querySelector("section");
 
 let nyelv="";
@@ -16,11 +17,11 @@ document.addEventListener("nyelvBeallit", (event) => {
     const nyelvSzint = event.detail.szint
     console.log(nyelv)
     console.log(nyelvSzint)
-    const adat = {
+    /*const adat = {
         language: event.detail.nyelv,
         level: event.detail.szint
-    }; 
-    services.postAdat("http://localhost:3000/api/chat", adat, (v)=>{console.log("a", v)})
+    }; */
+    //services.postAdat("http://localhost:3000/api/chat", adat, (v)=>{console.log("a", v)})
     new ChatUI(sectionELEM, AIuzenet);
 });
 
@@ -32,8 +33,8 @@ document.addEventListener("uzenet", (event)=>{
             level: nyelvSzint,
             message: uzenet}
     services.postAdat("http://localhost:3000/api/chat", chatAdat, (reply)=>{
-        AIuzenet=reply.message;
-        ChatUI.AIvalasz(AIuzenet);
+        let valasz=reply.message;
+        ChatUI.AIvalasz(valasz);
         }
     )
 })

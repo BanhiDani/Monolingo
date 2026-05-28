@@ -8,7 +8,7 @@ export default class ChatUI{
         this.uzenetKuld();
     }
 
-    AIvalasz(valasz){
+    static AIvalasz(valasz){
         const fogadElem=document.querySelector("#uzenetFogad");
         fogadElem.value+=`${valasz}\n`
     }
@@ -25,18 +25,21 @@ export default class ChatUI{
     }
 
     uzenetKuld(){
-        const kuldGombELEM=document.querySelector("#kuld")
+        this.kuldGombELEM=document.querySelector("#kuld")
         this.kuldElem=document.querySelector("#uzenetKuld")
-        kuldGombELEM.addEventListener("click", ()=>{
-                this.sajatEsemeny();  
-                })
+        this.kuldGombELEM.addEventListener("click", ()=>{
+                const szoveg = this.kuldElem.innerHTML.trim();
+                //this.sajatEsemeny();  
+                const esemeny = new CustomEvent("uzenet", {
+                    detail: {uzenet: szoveg}
+        });   
+        document.dispatchEvent(esemeny);
+        this.kuldElem.value="";
+            })
         };
         
-    sajatEsemeny(){
-        const esemeny = new CustomEvent("uzenet", {
-            detail: {uzenet: this.kuldElem.value}
-        });
-        this.kuldElem.value="";
-    document.dispatchEvent(esemeny);
-    }
+        
+   
+   
+    
 }
