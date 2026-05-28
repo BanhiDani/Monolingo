@@ -4,8 +4,6 @@
 const AIService = require("./AIService");
 const FakeAIService = require("./FakeAIService");
 
-// ⚠️ Node >=18 esetén van fetch
-// Ha nincs, majd later fixeljük
 class GeminiAIService extends AIService {
   constructor(apiKey) {
     super();
@@ -15,17 +13,17 @@ class GeminiAIService extends AIService {
 
   async reply({ language, level, message }) {
 
-    // 1️⃣ prompt generálás (FakeAI-tól)
+    // 1️⃣ Prompt + fallback a FakeAI-tól
     const { prompt, fallback } = this.fakeAI.reply({
       language,
       level,
-      message,
+      message
     });
 
     try {
-      // 2️⃣ Gemini API hívás
+      // 2️⃣ Gemini API hívás (FONTOS: jó model!)
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`,
         {
           method: "POST",
           headers: {
@@ -42,24 +40,38 @@ class GeminiAIService extends AIService {
       );
 
       const data = await response.json();
+      console.log(JSON.stringify(data, null, 2));
+      console.log(data); // DEBUG – nézheted mit ad vissza
 
-      // 3️⃣ Válasz kinyerése
-      const aiText =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      // 3️⃣ AI szöveg kiszedése (biztonságosan)
+      let aiText = null;
 
-      if (!aiText) {
-        throw new Error("No AI response");
+      if (
+        data.candidates &&
+        data.candidates.length > 0 &&
+        data.candidates[0].content &&
+        data.candidates[0].content.parts &&
+        data.candidates[0].content.parts.length > 0 &&
+        data.candidates[0].content.parts[0].text
+      ) {
+        aiText = data.candidates[0].content.parts[0].text;
       }
 
-      return aiText;
+      // 4️⃣ VISSZATÉRÉS → STRING
+      
+if (aiText) {
+  return aiText;
+} else {
+  return fallback.fallback; // 🔥 EZ A LÉNYEG
+}
+
 
     } catch (error) {
       console.error("Gemini error:", error);
-
-      // 4️⃣ fallback használat
-      return fallback;
+      return fallback;              // ✅ fallback minden hibára
     }
   }
 }
 
 module.exports = GeminiAIService;
+

@@ -33,7 +33,8 @@ document.addEventListener("uzenet", (event)=>{
             level: nyelvSzint,
             message: uzenet}
     services.postAdat("http://localhost:3000/api/chat", chatAdat, (reply)=>{
-        let valasz=reply.message;
+        let valasz=reply.reply
+        console.log(reply.reply)
         ChatUI.AIvalasz(valasz);
         }
     )
