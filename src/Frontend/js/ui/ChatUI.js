@@ -28,7 +28,7 @@ export default class ChatUI{
         this.kuldGombELEM=document.querySelector("#kuld")
         this.kuldElem=document.querySelector("#uzenetKuld")
         this.kuldGombELEM.addEventListener("click", ()=>{
-                const szoveg = this.kuldElem.innerHTML.trim();
+                const szoveg = this.kuldElem.value.trim();
                 //this.sajatEsemeny();  
                 const esemeny = new CustomEvent("uzenet", {
                     detail: {uzenet: szoveg}

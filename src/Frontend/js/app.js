@@ -13,14 +13,14 @@ const services= new Services();
 new LanguageSelector(sectionELEM, nyelv, nyelvSzint)
 
 document.addEventListener("nyelvBeallit", (event) => {
-    const nyelv = event.detail.nyelv;
-    const nyelvSzint = event.detail.szint
+    nyelv = event.detail.nyelv;
+    nyelvSzint = event.detail.szint
     console.log(nyelv)
     console.log(nyelvSzint)
-    /*const adat = {
+    const adat = {
         language: event.detail.nyelv,
         level: event.detail.szint
-    }; */
+    };
     //services.postAdat("http://localhost:3000/api/chat", adat, (v)=>{console.log("a", v)})
     new ChatUI(sectionELEM, AIuzenet);
 });
